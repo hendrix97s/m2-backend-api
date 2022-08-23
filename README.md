@@ -6,8 +6,8 @@
 4. Run the command `docker exec -it m2_backend_api compose install` to install the composer dependencies.
 5. Run the command `docker exec -it m2_backend_api artisan key:generate` to generate the key.
 6. Run the command `docker exec -it m2_backend_api artisan migrate:fresh --seed` to seed the database.
-7. Run the command `docker exec -it m2_backend_api artisan test` to seed the database.
-8. Run the command `docker exec -it m2_backend_api bash` to seed the database.
+7. Run the command `docker exec -it m2_backend_api artisan test` to run the tests.
+8. Run the command `docker exec -it m2_backend_api bash` to enter the container.
 
 ## Or run the script to execute project
 
