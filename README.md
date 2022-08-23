@@ -9,6 +9,6 @@
 7. Run the command `docker exec -it m2_backend_api artisan test` to seed the database.
 8. Run the command `docker exec -it m2_backend_api bash` to seed the database.
 
-## Run the script to execute project
+## Or run the script to execute project
 
 ... 9. OR run the script `sh init.sh` to execute the commands.
