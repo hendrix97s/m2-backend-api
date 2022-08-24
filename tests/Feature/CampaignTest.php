@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\Campaign;
 use App\Models\Group;
+use App\Models\Offer;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\DB;
@@ -77,6 +79,36 @@ class CampaignTest extends TestCase
     $campaign = Campaign::factory()->create();
     $response = $this->get(route('campaign.show', $campaign->uuid));
     $response->assertStatus(200);
+    $this->assertEquals(__('campaign.show.success'), $response->json('message'));
+  }
+
+  /** @test */
+  public function when_show_a_campaign_with_offer_and_products_and_groups()
+  {
+    $campaign = Campaign::factory()->create();
+    $offer = Offer::factory()->create([
+      'campaign_id' => $campaign->id,
+    ]);
+
+    $products = Product::factory(3)->create();
+
+    foreach ($products as $product) {
+      DB::table('offer_product')->insert([
+        'product_id' => $product->id,
+        'offer_id'   => $offer->id,
+      ]);
+    }
+
+    for($i = 0; $i < 3; $i++) {
+      Group::factory()->create([
+        'campaign_id' => $campaign->id,
+      ]);
+    }
+    
+    $response = $this->get(route('campaign.show', $campaign->uuid));
+    $response->assertStatus(200);
+    $this->assertCount(3, $response->json('data.groups'));
+    $this->assertCount(3, $response->json('data.offer.products'));
     $this->assertEquals(__('campaign.show.success'), $response->json('message'));
   }
 

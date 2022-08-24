@@ -13,6 +13,7 @@ class Campaign extends Model
 
     protected $with = [
       'groups',
+      'offer'
     ];
 
     protected $fillable = [
@@ -25,10 +26,17 @@ class Campaign extends Model
       'created_at',
       'updated_at',
       'groups',
+      'campaign_uuid',
+      'campaign_id'
     ];
 
     public function groups()
     {
       return $this->belongsToMany(Group::class, 'campaign_group');
+    }
+
+    public function offer()
+    {
+      return $this->hasOne(Offer::class);
     }
 }

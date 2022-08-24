@@ -10,8 +10,14 @@ class Offer extends Model
 {
     use HasFactory, Uuids;
 
-    protected $appends = ['campaign_uuid'];
+    protected $appends = [
+      'campaign_uuid'
+    ];
 
+    protected $with = [
+      'products'
+    ];
+    
     protected $fillable = [
       'discount_percentage',
       'campaign_id',
@@ -19,6 +25,7 @@ class Offer extends Model
 
     protected $hidden = [
       'id',
+      'campaign_id',
       'created_at',
       'updated_at',
       'campaign',
@@ -32,5 +39,10 @@ class Offer extends Model
     public function getCampaignUuidAttribute($value)
     {
         return $this->campaign->uuid ?? $value;
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'offer_product');
     }
 }
