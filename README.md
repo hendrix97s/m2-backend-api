@@ -1,14 +1,23 @@
 # Run the commands to execute project
 
-1. Run the command `cp .env.example .env` to create a new .env file.
-2. Run the command `docker-compose build` to build the image.
-3. Run the command `docker-compose up -d  --remove-orphans` to start the backend api container.
-4. Run the command `docker exec -it m2_backend_api compose install` to install the composer dependencies.
-5. Run the command `docker exec -it m2_backend_api artisan key:generate` to generate the key.
-6. Run the command `docker exec -it m2_backend_api artisan migrate:fresh --seed` to seed the database.
-7. Run the command `docker exec -it m2_backend_api artisan test` to run the tests.
-8. Run the command `docker exec -it m2_backend_api bash` to enter the container.
+01. Run the command `cp .env.example .env` to create a new .env file.
+02. Run the command `./docker/bin/sail build` to build the image.
+03. Run the command `./docker/bin/sail up -d  --remove-orphans` to start the backend api container.
+04. Run the command `./docker/bin/sail compose install` to install the composer dependencies.
+05. Run the command `./docker/bin/sail artisan key:generate` to generate the key.
+06. Run the command `./docker/bin/sail artisan migrate:fresh --seed` to seed the database.
+07. Run the command `./docker/bin/sail artisan test` to run the tests.
+08. Run the command `./docker/bin/sail bash` to enter the container.
+09. Run the command `./docker/bin/sail queue:work` to start the queue worker.
+
 
 ## Or run the script to execute project
 
-... 9. OR run the script `sh init.sh` to execute the commands.
+... 10. OR run the script `sh init.sh` to execute the project and start queue worker.
+
+
+## Access documentation of api project
+
+... 11. Run the command `./docker/bin/sail php artisan scribe:generate` to generate the documentation.
+
+click here to access documentation of api project: [http://localhost:9000/docs](http://localhost:9000/docs)
