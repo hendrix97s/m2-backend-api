@@ -60,7 +60,7 @@ class GroupController extends Controller
      */
     public function update(UpdateGroupRequest $request, GroupRepository $repository)
     {
-      $group = $repository->findByUuid($request->group);
+      $group = $repository->findByUuid($request->uuid);
       $service = new GroupService($repository);
       $group = $service->update($group->id ,$request->validated());
       return $this->response('group.update', $group);
@@ -75,7 +75,7 @@ class GroupController extends Controller
      */
     public function destroy(Request $request, GroupRepository $repository)
     {
-      $group = $repository->findByUuid($request->group);
+      $group = $repository->findByUuid($request->uuid);
       $response = $group ? $repository->delete($group->id) : false;
       $code = $response ? null : 404;
       return $this->response('group.destroy', $response, $code);

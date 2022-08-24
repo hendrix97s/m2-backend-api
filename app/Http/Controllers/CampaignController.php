@@ -44,7 +44,7 @@ class CampaignController extends Controller
      */
     public function show(Request $request, CampaignRepository $repository)
     {
-      $campaign = $repository->findByUuidAndShowGroups($request->campaign);
+      $campaign = $repository->findByUuidAndShowGroups($request->uuid);
       return $this->response('campaign.show', $campaign);
     }
 
@@ -57,7 +57,7 @@ class CampaignController extends Controller
      */
     public function update(UpdateCampaignRequest $request, CampaignRepository $repository)
     {
-        $campaign = $repository->findByUuid($request->campaign);
+        $campaign = $repository->findByUuid($request->uuid);
         $response = $repository->update($campaign->id, $request->validated());
         return $this->response('campaign.updated', $response);
     }
@@ -71,7 +71,7 @@ class CampaignController extends Controller
      */
     public function destroy(Request $request, CampaignRepository $repository)
     {
-        $campaign = $repository->findByUuid($request->campaign);
+        $campaign = $repository->findByUuid($request->uuid);
         $response = $campaign ? $campaign->delete() : false;
         $code = $response ? null : 404;
         return $this->response('campaign.destroy', $campaign, $code);

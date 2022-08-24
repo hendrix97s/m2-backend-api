@@ -46,7 +46,7 @@ class OfferController extends Controller
      */
     public function show(Request $request, OfferRepository $repository)
     {
-      $offer = $repository->findByUuid($request->offer);
+      $offer = $repository->findByUuid($request->uuid);
       return $this->response('offer.show', $offer);
     }
 
@@ -59,7 +59,7 @@ class OfferController extends Controller
      */
     public function update(UpdateOfferRequest $request, OfferRepository $repository)
     {
-      $offer = $repository->findByUuid($request->offer);
+      $offer = $repository->findByUuid($request->uuid);
       $offer = $repository->update($offer->id, $request->validated());
       return $this->response('offer.update', $offer);
     }
@@ -72,7 +72,7 @@ class OfferController extends Controller
      */
     public function destroy(Request $request, OfferRepository $repository)
     {
-      $offer = $repository->findByUuid($request->offer);
+      $offer = $repository->findByUuid($request->uuid);
       $result = $offer->delete();
       $code = $result ? 200 : 404;
       return $this->response('offer.destroy', $result, $code);

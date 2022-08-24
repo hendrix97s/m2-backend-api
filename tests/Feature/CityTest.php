@@ -15,6 +15,7 @@ class CityTest extends TestCase
     /** @test */
     public function when_query_all_cities()
     {
+        City::factory(3)->create();
         $response = $this->get(route('city.index'));
         $response->assertStatus(200);
         $this->assertEquals(__('city.list.success'), $response->json(['message']));
@@ -70,7 +71,6 @@ class CityTest extends TestCase
         'state' => 'SP',
         'country' => 'Brazil',
       ]);
-
       $payload = ['name' => 'Araras updated'];
       $response = $this->put(route('city.update', $city->uuid), $payload);
       $response->assertStatus(200);

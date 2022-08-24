@@ -42,7 +42,7 @@ class ProductController extends Controller
      */
     public function show(Request $request, ProductRepository $repository)
     {
-        $product = $repository->findByUuid($request->product);
+        $product = $repository->findByUuid($request->uuid);
         return $this->response('product.show', $product);
     }
 
@@ -55,7 +55,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, ProductRepository $repository)
     {
-        $product = $repository->findByUuid($request->product);    
+        $product = $repository->findByUuid($request->uuid);    
         $product = $repository->update($product->id, $request->validated());
         return $this->response('product.update', $product);
     }
@@ -69,7 +69,7 @@ class ProductController extends Controller
      */
     public function destroy(Request $request, ProductRepository $repository)
     {
-      $product  = $repository->findByUuid($request->product);
+      $product  = $repository->findByUuid($request->uuid);
       $response = $product ? $product->delete() : false;
       $code     = $response ? null : 404;
       return $this->response('product.destroy', $response, $code);
