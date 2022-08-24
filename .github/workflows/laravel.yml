@@ -30,7 +30,7 @@ jobs:
       run: |
           mysql --version
           sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -usail -ppassword -e "SHOW DATABASES"
+          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -um2_backend -pm2_backend -e "SHOW DATABASES"
 
 
     - name: Copy .env
