@@ -1,0 +1,227 @@
+name: City
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/city
+    metadata:
+      title: 'Display a listing of the resource.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "status":true,
+           "message":"List of cities",
+           "data":[
+             {
+               "uuid":"33cee53c-2507-4e07-a5d8-61d3d48f8c35",
+               "slug":"port-magdalen",
+               "name":"Port Magdalen",
+               "country":"Togo",
+               "state":"Colorado"
+             },
+          ]}
+        headers: []
+        description: '200'
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/city
+    metadata:
+      title: 'Store a newly created resource in storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of city.'
+        required: false
+        example: Araras
+        type: string
+        custom: []
+      state:
+        name: state
+        description: 'The state of city.'
+        required: false
+        example: SP.
+        type: string
+        custom: []
+      country:
+        name: country
+        description: 'Name of country.'
+        required: false
+        example: Brazil
+        type: string
+        custom: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "status": true,
+           "message": "New city created",
+           "data": {
+             "name": "Araras",
+             "state": "SP",
+             "country": "Brazil",
+             "uuid": "207f591a-ed61-4afd-b095-55516a0508b0",
+             "slug": "araras"
+           }
+          }
+        headers: []
+        description: '200'
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/city/{uuid}'
+    metadata:
+      title: 'Display the specified resource.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      uuid:
+        name: uuid
+        description: 'The Uuid of the City.'
+        required: true
+        example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
+        type: string
+        custom: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "status": true,
+           "message": "City found successfully",
+           "data": {
+             "uuid": "a9d2b989-6aa3-40d4-acf3-a4ba29f867c4",
+             "slug": "araras",
+             "name": "Araras",
+             "country": "Brazil",
+             "state": "SP"
+           }
+          }
+        headers: []
+        description: '200'
+    responseFields: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/city/{uuid}'
+    metadata:
+      title: 'Update the specified resource in storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      uuid:
+        name: uuid
+        description: 'The Uuid of the City.'
+        required: true
+        example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
+        type: string
+        custom: []
+    queryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of city.'
+        required: false
+        example: Araras
+        type: string
+        custom: []
+      state:
+        name: state
+        description: 'The state of city.'
+        required: false
+        example: SP.
+        type: string
+        custom: []
+      country:
+        name: country
+        description: 'Name of country.'
+        required: false
+        example: Brazil
+        type: string
+        custom: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": true,
+            "message": "city updated",
+            "data": {
+              "uuid": "6c08ade6-9a23-4e73-b6a1-eb3732f390fe",
+              "slug": "araras-updated",
+              "name": "Araras updated",
+              "country": "Brazil",
+              "state": "SP"
+            }
+          }
+        headers: []
+        description: '200'
+    responseFields: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/city/{uuid}'
+    metadata:
+      title: 'Remove the specified resource from storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      uuid:
+        name: uuid
+        description: 'The Uuid of the City.'
+        required: true
+        example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
+        type: string
+        custom: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": true,
+            "message": "City deleted",
+            "data": []
+          }
+        headers: []
+        description: '200'
+    responseFields: []
