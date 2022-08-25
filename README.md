@@ -1,6 +1,6 @@
 # To run artisan commands 
 
-Use docker `./docker/bin/sail artisan help` command to executa artisan commands or access docker bash shell with `./docker/bin/sail bash` and execute the command `php artisan help`.
+Use this `./docker/bin/sail artisan help` command to executa artisan commands or access docker bash shell with `./docker/bin/sail bash` and execute the command `php artisan help`.
 
 ## Run the commands to execute project
 
