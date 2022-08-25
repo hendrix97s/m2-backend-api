@@ -15,10 +15,10 @@ class ProductTest extends TestCase
   /** @test */
   public function when_list_all_products()
   {
-    Product::factory(3)->create();
+    Product::factory(1)->create();
     $response = $this->get(route('product.index'));
     $response->assertStatus(200);
-    $response->assertJsonCount(3, 'data');
+    $response->assertJsonCount(1, 'data');
     $this->equalTo(__('product.list'), $response->json('message'));
   }
 
@@ -34,7 +34,7 @@ class ProductTest extends TestCase
     $response = $this->post(route('product.store'), $payload);
     $response->assertStatus(200);
     $response->assertJsonFragment($payload);
-    $this->equalTo(__('product.store'), $response->json('message'));
+    $this->equalTo(__('product.create.success'), $response->json('message'));
   }
 
   /** @test */

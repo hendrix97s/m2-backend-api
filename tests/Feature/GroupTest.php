@@ -15,10 +15,10 @@ class GroupTest extends TestCase
     /** @test */
     public function when_list_all_groups()
     {
-      Group::factory(3)->create();
+      Group::factory()->create();
       $response = $this->get(route('group.index'));
       $response->assertStatus(200);
-      $response->assertJsonCount(3);
+      $response->assertJsonCount(1, 'data');
       $this->assertEquals(__('group.list.success'), $response->json('message'));
     }
 
@@ -67,8 +67,6 @@ class GroupTest extends TestCase
       $this->assertEquals(__('group.update.success'), $response->json('message'));
     }
 
-
-
     /** @test */
     public function when_update_a_group()
     {
@@ -81,5 +79,24 @@ class GroupTest extends TestCase
       $response->assertStatus(200);
       $response->assertJsonFragment($payload);
       $this->assertEquals(__('group.update.success'), $response->json('message'));
+    }
+
+    /** @test */
+    public function when_show_a_group()
+    {
+      $group = Group::factory()->create();
+      $response = $this->get(route('group.show', $group->uuid));
+      $response->assertStatus(200);
+      $response->assertJsonFragment($group->toArray());
+      $this->assertEquals(__('group.show.success'), $response->json('message'));
+    }
+
+    /** @test */
+    public function when_destroy_a_group()
+    {
+      $group = Group::factory()->create();
+      $response = $this->delete(route('group.destroy', $group->uuid));
+      $response->assertStatus(200);
+      $this->assertEquals(__('group.destroy.success'), $response->json('message'));
     }
 }

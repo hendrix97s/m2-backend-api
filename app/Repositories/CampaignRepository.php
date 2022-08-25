@@ -16,6 +16,7 @@ class CampaignRepository extends BaseRepository
     public function findByUuidAndShowGroups($uuid)
     {
       $campaign = $this->model->where('uuid', $uuid)->first();
+      if(!$campaign) return false;
       $campaign->makeVisible(['groups']);
       return $campaign;
     }

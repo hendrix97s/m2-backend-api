@@ -1,10 +1,10 @@
-name: City
+name: Offer
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/city
+    uri: api/v1/offer
     metadata:
       title: 'Display a listing of the resource.'
       description: ''
@@ -21,24 +21,24 @@ endpoints:
         status: 200
         content: |-
           {
-           "status":true,
-           "message":"List of cities",
-           "data":[
-             {
-               "uuid":"33cee53c-2507-4e07-a5d8-61d3d48f8c35",
-               "slug":"port-magdalen",
-               "name":"Port Magdalen",
-               "country":"Togo",
-               "state":"Colorado"
-             },
-          ]}
+             "status": true,
+             "message": "List of Offers",
+             "data": [
+               {
+                 "uuid": "f0bbecad-8a32-429d-b5c7-11e3000ceb2f",
+                 "discount_percentage": 58.84,
+                 "campaign_uuid": "082bea98-ca9a-4524-aecb-f862906f1290",
+                 "products": []
+               }
+             ]
+           }
         headers: []
         description: '200'
     responseFields: []
   -
     httpMethods:
       - POST
-    uri: api/v1/city
+    uri: api/v1/offer
     metadata:
       title: 'Store a newly created resource in storage.'
       description: ''
@@ -50,25 +50,18 @@ endpoints:
     urlParameters: []
     queryParameters: []
     bodyParameters:
-      name:
-        name: name
-        description: 'string The name of city.'
+      discount_percentage:
+        name: discount_percentage
+        description: 'The name of offer.'
         required: true
-        example: Araras
-        type: string
+        example: 0.0
+        type: number
         custom: []
-      state:
-        name: state
-        description: 'string The state of city.'
+      campaign_uuid:
+        name: campaign_uuid
+        description: 'The state of offer.'
         required: true
-        example: SP.
-        type: string
-        custom: []
-      country:
-        name: country
-        description: 'string Name of country.'
-        required: true
-        example: Brazil
+        example: f372282d-799c-4930-8dad-b2c3ee28679b
         type: string
         custom: []
     responses:
@@ -76,23 +69,21 @@ endpoints:
         status: 200
         content: |-
           {
-           "status": true,
-           "message": "New city created",
-           "data": {
-             "name": "Araras",
-             "state": "SP",
-             "country": "Brazil",
-             "uuid": "207f591a-ed61-4afd-b095-55516a0508b0",
-             "slug": "araras"
+             "status": true,
+             "message": "New Offer created",
+             "data": {
+               "discount_percentage": "10",
+               "uuid": "afb26055-bcd5-4eb3-9abd-1e97ef9f4563",
+               "campaign_uuid": "f372282d-799c-4930-8dad-b2c3ee28679b"
+             }
            }
-          }
         headers: []
         description: '200'
     responseFields: []
   -
     httpMethods:
       - GET
-    uri: 'api/v1/city/{uuid}'
+    uri: 'api/v1/offer/{uuid}'
     metadata:
       title: 'Display the specified resource.'
       description: ''
@@ -133,7 +124,7 @@ endpoints:
     httpMethods:
       - PUT
       - PATCH
-    uri: 'api/v1/city/{uuid}'
+    uri: 'api/v1/offer/{uuid}'
     metadata:
       title: 'Update the specified resource in storage.'
       description: ''
@@ -145,32 +136,25 @@ endpoints:
     urlParameters:
       uuid:
         name: uuid
-        description: 'The Uuid of the City.'
+        description: 'The Uuid of the Offer.'
         required: true
-        example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
+        example: 22264db6-4245-4308-a870-45ff691b02be
         type: string
         custom: []
     queryParameters: []
     bodyParameters:
-      name:
-        name: name
-        description: 'The name of city.'
+      discount_percentage:
+        name: discount_percentage
+        description: 'The name of offer.'
         required: false
-        example: Araras
-        type: string
+        example: 322182989.3176
+        type: number
         custom: []
-      state:
-        name: state
-        description: 'The state of city.'
+      campaign_uuid:
+        name: campaign_uuid
+        description: 'The state of offer.'
         required: false
-        example: SP.
-        type: string
-        custom: []
-      country:
-        name: country
-        description: 'Name of country.'
-        required: false
-        example: Brazil
+        example: 139a22bc-8149-4a09-bd5a-aadc04d8b4f4
         type: string
         custom: []
     responses:
@@ -179,13 +163,12 @@ endpoints:
         content: |-
           {
             "status": true,
-            "message": "city updated",
+            "message": "Offer updated",
             "data": {
-              "uuid": "6c08ade6-9a23-4e73-b6a1-eb3732f390fe",
-              "slug": "araras-updated",
-              "name": "Araras updated",
-              "country": "Brazil",
-              "state": "SP"
+              "uuid": "22264db6-4245-4308-a870-45ff691b02be",
+              "discount_percentage": 10,
+              "campaign_uuid": "139a22bc-8149-4a09-bd5a-aadc04d8b4f4",
+              "products": []
             }
           }
         headers: []
@@ -194,7 +177,7 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/city/{uuid}'
+    uri: 'api/v1/offer/{uuid}'
     metadata:
       title: 'Remove the specified resource from storage.'
       description: ''
@@ -206,7 +189,7 @@ endpoints:
     urlParameters:
       uuid:
         name: uuid
-        description: 'The Uuid of the City.'
+        description: 'The Uuid of the Offer.'
         required: true
         example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
         type: string
@@ -218,10 +201,52 @@ endpoints:
         status: 200
         content: |-
           {
-            "status": true,
-            "message": "City deleted",
-            "data": []
-          }
+             "status": true,
+             "message": "Offer deleted",
+             "data": []
+           }
+        headers: []
+        description: '200'
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/offer/{uuid}/products'
+    metadata:
+      title: 'Link a product to an offer.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      uuid:
+        name: uuid
+        description: 'The Uuid of the Offer.'
+        required: true
+        example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
+        type: string
+        custom: []
+    queryParameters: []
+    bodyParameters:
+      products:
+        name: products
+        description: 'The state of offer.'
+        required: true
+        example:
+          - perferendis
+        type: 'string[]'
+        custom: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+             "status": true,
+             "message": "Products linked to the offer successfully",
+             "data": []
+           }
         headers: []
         description: '200'
     responseFields: []

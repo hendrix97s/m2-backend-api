@@ -16,6 +16,7 @@ class OfferRepository extends BaseRepository
   {
     $campaignRepository       = new CampaignRepository();
     $campaign                 = $campaignRepository->findByUuid($data['campaign_uuid']);
+    if(!$campaign) return false;
     $data['campaign_id']      = $campaign->id;
     unset($data['campaign_uuid'],$campaign, $campaignRepository);
     return $this->create($data);

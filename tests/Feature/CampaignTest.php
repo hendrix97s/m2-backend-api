@@ -48,7 +48,7 @@ class CampaignTest extends TestCase
     ];
     $response = $this->put(route('campaign.update', $campaign->uuid), $payload);
     $response->assertStatus(200);
-    $this->assertEquals(__('campaign.updated.success'), $response->json('message'));
+    $this->assertEquals(__('campaign.update.success'), $response->json('message'));
   }
 
   /** @test */
@@ -63,11 +63,7 @@ class CampaignTest extends TestCase
   /** @test */
   public function when_deleting_a_campaign_with_groups(){
     $campaign = Campaign::factory()->create();
-    for($i = 0; $i < 3; $i++) {
-      Group::factory()->create([
-        'campaign_id' => $campaign->id,
-      ]);
-    }
+    Group::factory(3)->create(['campaign_id' => $campaign->id,]);
     $response = $this->delete(route('campaign.destroy', $campaign->uuid));
     $response->assertStatus(200);
     $this->assertEquals(__('campaign.destroy.success'), $response->json('message'));
@@ -90,25 +86,21 @@ class CampaignTest extends TestCase
       'campaign_id' => $campaign->id,
     ]);
 
-    $products = Product::factory(3)->create();
+    $product = Product::factory()->create();
 
-    foreach ($products as $product) {
-      DB::table('offer_product')->insert([
-        'product_id' => $product->id,
-        'offer_id'   => $offer->id,
-      ]);
-    }
+    DB::table('offer_product')->insert([
+      'product_id' => $product->id,
+      'offer_id'   => $offer->id,
+    ]);
 
-    for($i = 0; $i < 3; $i++) {
-      Group::factory()->create([
-        'campaign_id' => $campaign->id,
-      ]);
-    }
+    Group::factory()->create([
+      'campaign_id' => $campaign->id,
+    ]);
     
     $response = $this->get(route('campaign.show', $campaign->uuid));
     $response->assertStatus(200);
-    $this->assertCount(3, $response->json('data.groups'));
-    $this->assertCount(3, $response->json('data.offer.products'));
+    $this->assertCount(1, $response->json('data.groups'));
+    $this->assertCount(1, $response->json('data.offer.products'));
     $this->assertEquals(__('campaign.show.success'), $response->json('message'));
   }
 
@@ -118,16 +110,14 @@ class CampaignTest extends TestCase
   {
     $campaign = Campaign::factory()->create();
     
-    for($i = 0; $i < 3; $i++) {
-      Group::factory()->create([
-        'campaign_id' => $campaign->id,
-      ]);
-    }
+    Group::factory(2)->create([
+      'campaign_id' => $campaign->id,
+    ]);
 
     $response = $this->get(route('campaign.show', $campaign->uuid));
     $response->assertStatus(200);
+    $this->assertCount(2, $response->json('data.groups'));
     $this->assertEquals(__('campaign.show.success'), $response->json('message'));
   }
 
-  
 }

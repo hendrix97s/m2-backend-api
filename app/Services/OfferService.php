@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Log;
 
 class OfferService
 {
-  public function linkProductToOffer(array $data)
+  public function linkProductToOffer($offerUuid, array $data)
   {
-    $offerId = (new OfferRepository())->getIdByUuid($data['offer_uuid']);
+    $offerId = (new OfferRepository())->getIdByUuid($offerUuid);
 
-    foreach ($data['products'] as $uuid) {
-      LinkProductToOfferJob::dispatch($offerId, $uuid);
+    foreach ($data['products'] as $productUuid) {
+      LinkProductToOfferJob::dispatch($offerId, $productUuid);
     }
 
     return true;
