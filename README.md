@@ -20,7 +20,7 @@ Use this `./docker/bin/sail artisan help` command to executa artisan commands or
 
 ## Access documentation of api project
 
-... 11. Run the command `./docker/bin/sail php artisan scribe:generate` to generate the documentation.
+... 11. Run the command `./docker/bin/sail artisan scribe:generate` to generate the documentation.
 
 click here to access documentation of api project: [http://localhost:9000/docs](http://localhost:9000/docs)
 
