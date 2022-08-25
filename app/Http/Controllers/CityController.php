@@ -40,9 +40,9 @@ class CityController extends Controller
      * Store a newly created resource in storage.
      * 
      * @group City
-     * @bodyParam name string The name of city. Example: Araras
-     * @bodyParam state string The state of city. Example: SP.
-     * @bodyParam country string Name of country. Example: Brazil
+     * @bodyParam name string required string The name of city. Example: Araras
+     * @bodyParam state string required string The state of city. Example: SP.
+     * @bodyParam country string required string Name of country. Example: Brazil
      * 
      * @response {
      *  "status": true,
@@ -87,13 +87,14 @@ class CityController extends Controller
     public function show(string $uuid, CityRepository $repository)
     {
         $city = $repository->findByUuid($uuid);
-        return $this->response('city.show', $city);
+        $code = $city ? 200 : 404;
+        return $this->response('city.show', $city, $code);
     }
 
     /**
      * Update the specified resource in storage.
      * @group City
-     * @urlParam uuid required The Uuid of the City. Example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
+     * @urlParam uuid string required The Uuid of the City. Example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
      * @bodyParam name string The name of city. Example: Araras
      * @bodyParam state string The state of city. Example: SP.
      * @bodyParam country string Name of country. Example: Brazil
@@ -116,14 +117,16 @@ class CityController extends Controller
     {
         $city = $repository->findByUuid($request->uuid);
         $data = $request->validated();
-        $city = $repository->update($city->id, $data);
-        return $this->response('city.update', $city);
+        $response = $city ? $repository->update($city->id, $data): false;
+        $code = $city ? 200 : 404;
+
+        return $this->response('city.update', $response, $code);
     }
 
     /**
      * Remove the specified resource from storage.
      * @group City
-     * @urlParam uuid required The Uuid of the City. Example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
+     * @urlParam uuid string required The Uuid of the City. Example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
      * @response {
      *   "status": true,
      *   "message": "City deleted",
@@ -135,8 +138,10 @@ class CityController extends Controller
     public function destroy(Request $request, CityRepository $repository)
     {
         $city = $repository->findByUuid($request->uuid);
-        $response = $repository->delete($city->id);
-        return $this->response('city.delete', $response);
+
+        $response = $city ? $repository->delete($city->id):false;
+        $code = $city ? 200 : 404;
+        return $this->response('city.delete', $response, $code);
     }
 
 }

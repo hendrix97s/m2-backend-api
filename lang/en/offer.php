@@ -24,5 +24,10 @@ return [
     'show' => [
         'success' => 'Offer found successfully',
         'fail' => 'Problem finding this offer',
-    ]
+    ],
+    'product' => [
+        'success' => 'Products linked to the offer successfully',
+        'fail' => 'Problem to link products to the offer',
+    ],
+    
 ];

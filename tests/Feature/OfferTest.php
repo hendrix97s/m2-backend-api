@@ -17,10 +17,10 @@ class OfferTest extends TestCase
     /** @test */
     public function when_query_all_offers()
     {
-      $this->seed('OfferSeeder');
+      Offer::factory()->create();
       $response = $this->get(route('offer.index'));
       $response->assertStatus(200);
-      $this->assertEquals(3, count($response->json('data')));
+      $this->assertEquals(1, count($response->json('data')));
       $this->assertEquals(__('offer.list.success'), $response->json('message'));
     }
 
@@ -67,5 +67,21 @@ class OfferTest extends TestCase
       $response = $this->get(route('offer.show', $offer->uuid));
       $response->assertStatus(200);
       $this->assertEquals(__('offer.show.success'), $response->json('message'));
+    }
+
+    /** @test */
+    public function when_add_products_to_offer()
+    {
+      $offer = Offer::factory()->create();
+      $payload = [
+        'products' => [
+          Product::factory()->create()->uuid,
+          Product::factory()->create()->uuid,
+        ],
+      ];
+
+      $response = $this->post(route('offer.products', $offer->uuid), $payload);
+      $response->assertStatus(200);
+      $this->assertEquals(__('offer.product.success'), $response->json('message'));
     }
 }

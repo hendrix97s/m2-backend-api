@@ -18,7 +18,7 @@ class BaseRepository
 
   public function findByUuid($uuid)
   {
-    return $this->model->where('uuid', $uuid)->first();
+    return $this->model->where('uuid', $uuid)->first() ?? false;
   }
 
   public function findBySlug($slug)

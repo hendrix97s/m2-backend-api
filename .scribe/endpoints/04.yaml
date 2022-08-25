@@ -1,10 +1,10 @@
-name: City
+name: Product
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/city
+    uri: api/v1/product
     metadata:
       title: 'Display a listing of the resource.'
       description: ''
@@ -21,24 +21,25 @@ endpoints:
         status: 200
         content: |-
           {
-           "status":true,
-           "message":"List of cities",
-           "data":[
-             {
-               "uuid":"33cee53c-2507-4e07-a5d8-61d3d48f8c35",
-               "slug":"port-magdalen",
-               "name":"Port Magdalen",
-               "country":"Togo",
-               "state":"Colorado"
-             },
-          ]}
+             "status": true,
+             "message": "List of Products",
+             "data": [
+               {
+                 "uuid": "4664f01c-63cf-4aa7-a2b6-e91e98a689eb",
+                 "slug": "genesis-gutkowski",
+                 "name": "Genesis Gutkowski",
+                 "price": 41.98,
+                 "description": "Rerum quis molestiae sed deleniti aut dolorem. Sint eos dignissimos facilis quo. Eos dolores excepturi sint pariatur qui itaque eum numquam. Quas eos consequatur a qui placeat."
+               }
+             ]
+           }
         headers: []
         description: '200'
     responseFields: []
   -
     httpMethods:
       - POST
-    uri: api/v1/city
+    uri: api/v1/product
     metadata:
       title: 'Store a newly created resource in storage.'
       description: ''
@@ -52,39 +53,39 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: 'string The name of city.'
-        required: true
-        example: Araras
+        description: 'string The name of product.'
+        required: false
+        example: 'Product 1'
+        type: required
+        custom: []
+      description:
+        name: description
+        description: 'The state of product.'
+        required: false
+        example: 'Description 1.'
         type: string
         custom: []
-      state:
-        name: state
-        description: 'string The state of city.'
-        required: true
-        example: SP.
-        type: string
-        custom: []
-      country:
-        name: country
-        description: 'string Name of country.'
-        required: true
-        example: Brazil
-        type: string
+      price:
+        name: price
+        description: 'string price of product.'
+        required: false
+        example: '5.89'
+        type: required
         custom: []
     responses:
       -
         status: 200
         content: |-
           {
-           "status": true,
-           "message": "New city created",
-           "data": {
-             "name": "Araras",
-             "state": "SP",
-             "country": "Brazil",
-             "uuid": "207f591a-ed61-4afd-b095-55516a0508b0",
-             "slug": "araras"
-           }
+            "status": true,
+            "message": "product.store.success",
+            "data": {
+              "name": "Product 1",
+              "description": "Description 1",
+              "price": "100",
+              "uuid": "cabae00a-c42d-4e08-8274-9d2c782cccca",
+              "slug": "product-1"
+            }
           }
         headers: []
         description: '200'
@@ -92,7 +93,7 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/v1/city/{uuid}'
+    uri: 'api/v1/product/{uuid}'
     metadata:
       title: 'Display the specified resource.'
       description: ''
@@ -104,9 +105,9 @@ endpoints:
     urlParameters:
       uuid:
         name: uuid
-        description: 'The Uuid of the City.'
+        description: 'The Uuid of the Product.'
         required: true
-        example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
+        example: d8f21df7-90bd-40d6-ac92-cbc1fd7d5cf0
         type: string
         custom: []
     queryParameters: []
@@ -116,15 +117,15 @@ endpoints:
         status: 200
         content: |-
           {
-           "status": true,
-           "message": "City found successfully",
-           "data": {
-             "uuid": "a9d2b989-6aa3-40d4-acf3-a4ba29f867c4",
-             "slug": "araras",
-             "name": "Araras",
-             "country": "Brazil",
-             "state": "SP"
-           }
+            "status": true,
+            "message": "Product found successfully",
+            "data": {
+              "uuid": "d8f21df7-90bd-40d6-ac92-cbc1fd7d5cf0",
+              "slug": "reanna-olson",
+              "name": "Reanna Olson",
+              "price": 38.68,
+              "description": "Provident est sit nihil animi est beatae minima. Ut odit laudantium et perferendis dicta. Consequuntur qui reprehenderit velit. Unde rerum commodi pariatur est exercitationem."
+            }
           }
         headers: []
         description: '200'
@@ -133,7 +134,7 @@ endpoints:
     httpMethods:
       - PUT
       - PATCH
-    uri: 'api/v1/city/{uuid}'
+    uri: 'api/v1/product/{uuid}'
     metadata:
       title: 'Update the specified resource in storage.'
       description: ''
@@ -145,32 +146,32 @@ endpoints:
     urlParameters:
       uuid:
         name: uuid
-        description: 'The Uuid of the City.'
+        description: 'The Uuid of the product.'
         required: true
-        example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
+        example: 209207ef-fc7e-4d44-b5d8-4574a6934fb9
         type: string
         custom: []
     queryParameters: []
     bodyParameters:
       name:
         name: name
-        description: 'The name of city.'
+        description: 'The name of product.'
         required: false
-        example: Araras
+        example: 'Product updated'
         type: string
         custom: []
-      state:
-        name: state
-        description: 'The state of city.'
+      description:
+        name: description
+        description: 'The state of product.'
         required: false
-        example: SP.
+        example: 'Description 1.'
         type: string
         custom: []
-      country:
-        name: country
-        description: 'Name of country.'
+      price:
+        name: price
+        description: 'price of product.'
         required: false
-        example: Brazil
+        example: '44.76'
         type: string
         custom: []
     responses:
@@ -179,13 +180,13 @@ endpoints:
         content: |-
           {
             "status": true,
-            "message": "city updated",
+            "message": "Product updated",
             "data": {
-              "uuid": "6c08ade6-9a23-4e73-b6a1-eb3732f390fe",
-              "slug": "araras-updated",
-              "name": "Araras updated",
-              "country": "Brazil",
-              "state": "SP"
+              "uuid": "209207ef-fc7e-4d44-b5d8-4574a6934fb9",
+              "slug": "product-updated",
+              "name": "Product updated",
+              "price": 44.76,
+              "description": "Unde et in sint sed. Est dolores suscipit quasi laborum itaque quis. Aut distinctio sapiente illo et similique unde."
             }
           }
         headers: []
@@ -194,7 +195,7 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/city/{uuid}'
+    uri: 'api/v1/product/{uuid}'
     metadata:
       title: 'Remove the specified resource from storage.'
       description: ''
@@ -206,7 +207,7 @@ endpoints:
     urlParameters:
       uuid:
         name: uuid
-        description: 'The Uuid of the City.'
+        description: 'The uuid of the product.'
         required: true
         example: a9d2b989-6aa3-40d4-acf3-a4ba29f867c4
         type: string
@@ -218,10 +219,10 @@ endpoints:
         status: 200
         content: |-
           {
-            "status": true,
-            "message": "City deleted",
-            "data": []
-          }
+             "status": true,
+             "message": "Product deleted",
+             "data": []
+           }
         headers: []
         description: '200'
     responseFields: []

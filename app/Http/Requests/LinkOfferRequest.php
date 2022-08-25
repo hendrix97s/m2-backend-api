@@ -24,7 +24,6 @@ class LinkOfferRequest extends FormRequest
     public function rules()
     {
         return [
-          'offer_uuid' => 'required|string|exists:offers,uuid',
           'products' => 'required|array',
         ];
     }
