@@ -23,3 +23,6 @@ Use docker `./docker/bin/sail artisan help` command to executa artisan commands 
 ... 11. Run the command `./docker/bin/sail php artisan scribe:generate` to generate the documentation.
 
 click here to access documentation of api project: [http://localhost:9000/docs](http://localhost:9000/docs)
+
+## Collection Postman
+[w2.backend.api.postman_collection.zip](https://github.com/hendrix97s/m2-backend-api/files/9420446/w2.backend.api.postman_collection.zip)
